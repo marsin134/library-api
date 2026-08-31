@@ -15,10 +15,9 @@ private:
     std::condition_variable cv_;
 
 public:
-    DbPool(const std::string&connection_string, int pool_size = 10) 
-        : conn_string_(connection_string), pool_size_(pool_size) {}
+    DbPool(const std::string&connection_string, int pool_size = 10);
 
-    std::shared_ptr<pqxx::connection> getConnection() {}
+    std::shared_ptr<pqxx::connection> getConnection();
 
-    void releaseConnection(std::shared_ptr<pqxx::connection> conn) {}
+    void releaseConnection(std::shared_ptr<pqxx::connection> conn);
 };
