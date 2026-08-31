@@ -49,6 +49,7 @@ target_include_directories(library_server PRIVATE
     ${PQXX_INCLUDE_DIRS}
     ${CROW_INCLUDE_DIR}
     ${REDIS_INCLUDE_DIRS} 
+    ${json_SOURCE_DIR}/include 
 )
 
 target_link_libraries(library_server PRIVATE
