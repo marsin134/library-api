@@ -15,9 +15,9 @@ struct Book {
 
 class BookRepository {
 public:
-    explicit BookRepository(std::shared_ptr<DbPool> pool) : pool_(pool) {}
+    explicit BookRepository(std::shared_ptr<DbPool> pool);
 
-    std::optional<Book> getById(int id) {}
+    std::optional<Book> getById(int id);
 
 private:
     std::shared_ptr<DbPool> pool_;
