@@ -1,6 +1,10 @@
 #include "bookRepository.h"
 
-std::optional<Book> BookRepository::getById(int id) {
+using namespace std;
+
+BookRepository::BookRepository(shared_ptr<DbPool> pool) : pool_(pool) {}
+
+optional<Book> BookRepository::getById(int id) {
     try {
         auto conn = pool_->getConnection();
         pqxx::work txn(*conn);
@@ -11,21 +15,21 @@ std::optional<Book> BookRepository::getById(int id) {
         );
 
         if (result.empty()) {
-            return std::nullopt;
+            return nullopt;
         }
 
         const auto& row = result[0];
         Book book{
             row["id"].as<int>(),
-            row["title"].as<std::string>(),
-            row["author"].as<std::string>(),
+            row["title"].as<string>(),
+            row["author"].as<string>(),
             row["year"].as<int>(),
-            row["genre"].as<std::string>()
+            row["genre"].as<string>()
         };
 
         return book;
-    } catch (const std::exception& e) {
-        std::cerr << "Error fetching book by ID: " << e.what() << std::endl;
-        return std::nullopt;
+    } catch (const exception& e) {
+        cerr << "Error fetching book by ID: " << e.what() << endl;
+        return nullopt;
     }
 }   
