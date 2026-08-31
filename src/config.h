@@ -12,7 +12,7 @@ struct DBConfig {
 struct CacheConfig {
     std::string host;
     int port;
-    int ttlSeconds;
+    int ttl_seconds;
 };
 
 struct ServerConfig {
@@ -26,7 +26,6 @@ class Config {
         DBConfig db;
         CacheConfig cache;
 
-    private:
         bool load(const std::string &filename);
 };
 

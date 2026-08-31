@@ -4,9 +4,7 @@ using namespace std;
 
 CacheManager::CacheManager(const string& host, int port, int ttl_seconds)
     : ttl_seconds_(ttl_seconds) {
-    redis_ = make_unique<sw::redis::Redis>(
-            fmt::format("tcp://{}:{}", host, port)
-        );
+    redis_ = make_unique<sw::redis::Redis>("tcp://" + host + ":" + to_string(port));
 }
 
 

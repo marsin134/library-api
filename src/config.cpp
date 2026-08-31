@@ -1,6 +1,7 @@
 #include "config.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <iostream>
 
 using namespace std;
 using json = nlohmann::json;
@@ -28,8 +29,7 @@ bool Config::load(const string &configFilePath) {
 
             cache.host = data["cache"]["host"];
             cache.port = data["cache"]["port"];
-            cache.ttlSeconds = data["cache"]["ttl_seconds"];
-
+            cache.ttl_seconds = data["cache"]["ttl_seconds"];
 
     } catch (const exception &e) {
         cerr << "Error loading config file: " << e.what() << endl;

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-DbPool::DbPool(const string &connection_string, int pool_size = 5) : conn_string_(connection_string), pool_size_(pool_size)  {
+DbPool::DbPool(const string &connection_string, int pool_size) : conn_string_(connection_string), pool_size_(pool_size)  {
     for (int i = 0; i < pool_size_; ++i) {
             try {
                 auto conn = make_shared<pqxx::connection>(conn_string_);

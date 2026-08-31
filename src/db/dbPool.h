@@ -4,6 +4,7 @@
 #include <string>
 #include <mutex>
 #include <queue>
+#include <condition_variable>
 #include <iostream>
 
 class DbPool {
