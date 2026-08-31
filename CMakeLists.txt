@@ -25,7 +25,7 @@ pkg_check_modules(PQXX REQUIRED libpqxx)
 # --- Redis (redis++) ---
 set(REDIS_PLUS_PLUS_LIB "/usr/local/lib/libredis++.so")
 set(HIREDIS_LIB "/usr/local/lib/libhiredis.so")
-set(REDIS_INCLUDE_DIRS "/usr/local/include/hiredis" "/usr/local/include/redis++")
+set(REDIS_INCLUDE_DIRS "/usr/local/include/hiredis" "/usr/local/include/sw/redis++")
 
 # --- Boost ---
 find_package(Boost 1.66 REQUIRED COMPONENTS system)
@@ -42,7 +42,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
-add_executable(library_server src/main.cpp)
+add_executable(library_server
+    src/config.cpp
+    src/cache/cacheManager.cpp
+    src/db/dbPool.cpp
+    src/db/bookRepository.cpp
+    src/service/bookService.cpp
+    src/main.cpp
+)
 
 target_include_directories(library_server PRIVATE
     src/
@@ -57,7 +64,7 @@ target_link_libraries(library_server PRIVATE
     ${REDIS_PLUS_PLUS_LIB}
     ${HIREDIS_LIB}
     Boost::system
-    pthread  # нужен для многопоточности
+    pthread  
     nlohmann_json::nlohmann_json
 )
 
